@@ -16,6 +16,7 @@ public class Frame : MonoBehaviour {
     public Frame EmptyFrame;
     public bool isEmptyFrame;
     public bool isActiveFrame;
+    public GameObject frameCam;
 
 	public void OnBorderTrigger(int borderSide)
     {
@@ -66,6 +67,8 @@ public class Frame : MonoBehaviour {
     {
         isActiveFrame = false;
         otherFrame.isActiveFrame = true;
+        frameCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 1;
+        otherFrame.frameCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 2;
     }
 
     private void FixedUpdate()
