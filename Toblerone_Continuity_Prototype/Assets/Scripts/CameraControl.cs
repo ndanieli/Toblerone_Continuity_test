@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour {
 
     public GameObject zoomOutCamera;
-    private bool zoomIn;
+    public bool zoomIn;
 
 	// Use this for initialization
 	void Start () {
@@ -16,19 +16,23 @@ public class CameraControl : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Fire2"))
         {
-            if (zoomIn)
-            {
-                zoomOutCamera.SetActive(true);
-                zoomIn = false;
-                Debug.Log("Zoom out");
-            } else
-            {
-                zoomOutCamera.SetActive(false);
-                zoomIn = true;
-                Debug.Log("Zoom in");
-            }
+            zoomInOut();
         }
+    }
 
-
+    void zoomInOut()
+    {
+        if (zoomIn)
+        {
+            zoomOutCamera.SetActive(true);
+            zoomIn = false;
+            //Debug.Log("Zoom out");
+        }
+        else
+        {
+            zoomOutCamera.SetActive(false);
+            zoomIn = true;
+            //Debug.Log("Zoom in");
+        }
     }
 }
