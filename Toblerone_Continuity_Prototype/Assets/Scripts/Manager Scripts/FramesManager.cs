@@ -35,7 +35,7 @@ public class FramesManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (!GameObject.Find("CameraController").GetComponent<CameraControl>().zoomIn) {
+        if (!GameObject.Find("CameraManager").GetComponent<CameraControl>().zoomIn) {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);

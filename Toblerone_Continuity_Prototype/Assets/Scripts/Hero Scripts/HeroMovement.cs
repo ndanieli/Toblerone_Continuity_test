@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ public class HeroMovement : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
@@ -38,7 +39,7 @@ public class HeroMovement : MonoBehaviour {
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (cameraControl.zoomIn)
         {
@@ -53,9 +54,9 @@ public class HeroMovement : MonoBehaviour {
                 rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 
             if (h > 0 && !facingRight)
-                Flip();
+                flip();
             else if (h < 0 && facingRight)
-                Flip();
+                flip();
 
             if (jump)
             {
@@ -66,12 +67,23 @@ public class HeroMovement : MonoBehaviour {
         }
     }
 
-
-    void Flip()
+    private void flip()
     {
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    public void FreezeHero()
+    {
+        rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    public void UnFreezeHero(Vector2 linearVelocity, float angularVelocity)
+    {
+        rb2d.constraints = RigidbodyConstraints2D.None;
+        rb2d.velocity = linearVelocity;
+        rb2d.angularVelocity = angularVelocity;
     }
 }

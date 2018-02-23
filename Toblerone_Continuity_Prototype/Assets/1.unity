@@ -402,7 +402,24 @@ Prefab:
       propertyPath: cameraControl
       value: 
       objectReference: {fileID: 599467160}
-    m_RemovedComponents: []
+    - target: {fileID: 5000000, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
+      propertyPath: m_LinearDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000000, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8200002, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &527152065
@@ -657,6 +674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomOutCamera: {fileID: 54084191}
   zoomIn: 0
+  hero: {fileID: 1171895089}
 --- !u!4 &599467161
 Transform:
   m_ObjectHideFlags: 0
@@ -1112,6 +1130,11 @@ Prefab:
     - target: {fileID: 4975016053144344, guid: fadfc232b85929340b04da30d5140521, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 61834950420894004, guid: fadfc232b85929340b04da30d5140521,
+        type: 2}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fadfc232b85929340b04da30d5140521, type: 2}
