@@ -12,7 +12,7 @@ public class Border : MonoBehaviour
     {
         if (other.tag.Equals("Player"))
         {
-            frame.OnBorderTrigger(borderSide);
+            frame.frameManager.SwitchHeroFrame(borderSide);
         }
     }
 

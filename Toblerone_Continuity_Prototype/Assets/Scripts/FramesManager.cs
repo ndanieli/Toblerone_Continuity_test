@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FramesManager : MonoBehaviour {
 
-    public const int TOP = 0;
-    public const int RIGHT = 1;
-    public const int BOTTOM = 2;
-    public const int LEFT = 3;
+    public const int LEFT = 0;
+    public const int TOP = 1;
+    public const int RIGHT = 2;
+    public const int BOTTOM = 3;
 
     public int rows, cols;
     public struct position
@@ -18,6 +19,8 @@ public class FramesManager : MonoBehaviour {
     private position activeFrame;
     public int initialHeroFrameRow;
     public int initialHeroFrameColumn;
+    public int initialEmptyFrameRow;
+    public int initialEmptyFrameColumn;
 
     public position emptyFrame;
     public GameObject[,] frames;
@@ -35,22 +38,22 @@ public class FramesManager : MonoBehaviour {
         if (!GameObject.Find("CameraController").GetComponent<CameraControl>().zoomIn) {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                switchFrames(emptyFrame.row + 1, emptyFrame.col);
+                switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                switchFrames(emptyFrame.row, emptyFrame.col - 1);
+                switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col - 1);
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                switchFrames(emptyFrame.row - 1, emptyFrame.col);
+                switchEmptyFrameLocation(emptyFrame.row - 1, emptyFrame.col);
             }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                switchFrames(emptyFrame.row, emptyFrame.col + 1);
+                switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col + 1);
             }
 
         }
@@ -64,19 +67,16 @@ public class FramesManager : MonoBehaviour {
             for (int j = 1; j <= cols; j++)
             {
                 frames[i, j] = GameObject.Find("Frame" + (i - 1) + (j - 1));
-                if ((frames[i,j] != null) && (frames[i, j].GetComponent<Frame>().isEmptyFrame))
-                {
-                    emptyFrame.row = i;
-                    emptyFrame.col = j;
-                }
             }
         }
 
         activeFrame.row = initialHeroFrameRow + 1;
         activeFrame.col = initialHeroFrameColumn + 1;
+        emptyFrame.row = initialEmptyFrameRow + 1;
+        emptyFrame.col = initialEmptyFrameColumn + 1;
     }
 
-    void switchFrames(int row, int col)
+    private void switchEmptyFrameLocation(int row, int col)
     {
         if (frames[row, col] != null)
         {
@@ -117,4 +117,115 @@ public class FramesManager : MonoBehaviour {
         }
 
     }
+
+    public void SwitchHeroFrame(int borderSide)
+    {
+        int nextFrameRow = activeFrame.row;
+        int nextFrameCol = activeFrame.col;
+
+        switch (borderSide)
+        {
+            case LEFT:
+                nextFrameCol -= 1;
+                break;
+
+            case RIGHT:
+                nextFrameCol += 1;
+                break;
+
+            case TOP:
+                nextFrameRow -= 1;
+                break;
+
+            case BOTTOM:
+                nextFrameRow += 1;
+                break;
+
+            default:
+                break;
+        }
+
+        if (frames[nextFrameRow,nextFrameCol] != null && checkLabels(borderSide, nextFrameRow, nextFrameCol))
+        {
+            moveHeroToNextFrame(borderSide);
+            moveCameraToActiveFrame(nextFrameRow, nextFrameCol);
+            changeActiveFrame(nextFrameRow, nextFrameCol);
+        }
+    }
+
+    private bool checkLabels(int borderSide, int nextFrameRow, int nextFrameCol)
+    {
+        int originalFrameLabel = frames[activeFrame.row, activeFrame.col].GetComponent<Frame>().borderLabels[borderSide];
+        int otherFrameLabel = -1;
+
+        Frame otherFrame = frames[nextFrameRow, nextFrameCol].GetComponent<Frame>();
+
+        if (otherFrame == null)
+        {
+            return false;
+        }
+
+        switch (borderSide)
+        {
+            case LEFT:
+                otherFrameLabel = otherFrame.borderLabels[RIGHT];
+                break;
+
+            case TOP:
+                otherFrameLabel = otherFrame.borderLabels[BOTTOM];
+                break;
+
+            case RIGHT:
+                otherFrameLabel = otherFrame.borderLabels[LEFT];
+                break;
+
+            case BOTTOM:
+                otherFrameLabel = otherFrame.borderLabels[TOP];
+                break;
+
+            default:
+                break;
+        }
+
+        return originalFrameLabel == otherFrameLabel;
+
+    }
+
+    private void moveCameraToActiveFrame(int nextFrameRow, int nextFrameCol)
+    {
+        frames[activeFrame.row, activeFrame.col].GetComponent<Frame>().frameCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 1;
+        frames[nextFrameRow, nextFrameCol].GetComponent<Frame>().frameCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 2;
+    }
+
+    private void changeActiveFrame(int newFrameRow, int newFrameCol)
+    {
+        activeFrame.row = newFrameRow;
+        activeFrame.col = newFrameCol;
+    }
+
+    private void moveHeroToNextFrame(int borderSide)
+    {
+        switch (borderSide)
+        {
+            case LEFT:
+                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x - 5, hero.gameObject.transform.position.y);
+                break;
+
+            case TOP:
+                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x, hero.gameObject.transform.position.y - 5);
+                break;
+
+            case RIGHT:
+                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x + 5, hero.gameObject.transform.position.y);
+                break;
+
+            case BOTTOM:
+                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x, hero.gameObject.transform.position.y + 5);
+                break;
+
+            default:
+                break;
+        }
+    }
+
 }

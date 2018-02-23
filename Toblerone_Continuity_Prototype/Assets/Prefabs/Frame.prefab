@@ -1220,16 +1220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a46b5a6612b40d4a8331c5916da2822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: 0
   borderLabels: 01000000ffffffff02000000ffffffff
   hero: {fileID: 0}
-  otherFrames:
-  - {fileID: 0}
-  - {fileID: 0}
-  EmptyFrame: {fileID: 0}
-  isEmptyFrame: 0
-  isActiveFrame: 1
   frameCam: {fileID: 1812126162821168}
+  frameManager: {fileID: 0}
 --- !u!114 &114624404710335046
 MonoBehaviour:
   m_ObjectHideFlags: 1
