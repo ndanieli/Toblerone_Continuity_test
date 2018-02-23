@@ -12,6 +12,7 @@ public class HeroMovement : MonoBehaviour {
     public float maxSpeed = 5f;
     public float jumpForce = 1000f;
     public Transform groundCheck;
+    public CameraControl cameraControl;
 
 
     private bool grounded = false;
@@ -39,26 +40,29 @@ public class HeroMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
-
-        anim.SetFloat("Speed", Mathf.Abs(h));
-
-        if (h * rb2d.velocity.x < maxSpeed)
-            rb2d.AddForce(Vector2.right * h * moveForce);
-
-        if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
-            rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
-
-        if (h > 0 && !facingRight)
-            Flip();
-        else if (h < 0 && facingRight)
-            Flip();
-
-        if (jump)
+        if (cameraControl.zoomIn)
         {
-            anim.SetTrigger("Jump");
-            rb2d.AddForce(new Vector2(0f, jumpForce));
-            jump = false;
+            float h = Input.GetAxis("Horizontal");
+
+            anim.SetFloat("Speed", Mathf.Abs(h));
+
+            if (h * rb2d.velocity.x < maxSpeed)
+                rb2d.AddForce(Vector2.right * h * moveForce);
+
+            if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
+                rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
+
+            if (h > 0 && !facingRight)
+                Flip();
+            else if (h < 0 && facingRight)
+                Flip();
+
+            if (jump)
+            {
+                anim.SetTrigger("Jump");
+                rb2d.AddForce(new Vector2(0f, jumpForce));
+                jump = false;
+            }
         }
     }
 

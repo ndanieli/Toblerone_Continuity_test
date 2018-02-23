@@ -355,6 +355,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114826437563131022, guid: 6aa187bc6339843479c03fdfd71404a3,
+        type: 2}
+      propertyPath: cameraControl
+      value: 
+      objectReference: {fileID: 599467160}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
   m_IsPrefabParent: 0
@@ -773,7 +778,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 874026061}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.026667, y: 2.926667, z: -4.04}
+  m_LocalPosition: {x: -3.36, y: 2.926667, z: -4.04}
   m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 1}
   m_Children:
   - {fileID: 2016895977}
@@ -813,6 +818,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rows: 2
   cols: 2
+  initialHeroFrameRow: 0
+  initialHeroFrameColumn: 0
+  hero: {fileID: 1171895089}
 --- !u!4 &1232323201
 Transform:
   m_ObjectHideFlags: 0
@@ -894,6 +902,11 @@ Prefab:
       propertyPath: EmptyFrame
       value: 
       objectReference: {fileID: 804304183}
+    - target: {fileID: 114329735454707392, guid: fadfc232b85929340b04da30d5140521,
+        type: 2}
+      propertyPath: m_Priority
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fadfc232b85929340b04da30d5140521, type: 2}
   m_IsPrefabParent: 0

@@ -73,6 +73,7 @@ public class Frame : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        /*
         if (Input.GetButtonDown("Fire1") && isActiveFrame)
         {
             double emptyFramePosition = EmptyFrame.position;
@@ -83,6 +84,7 @@ public class Frame : MonoBehaviour {
                 switchFrames();
             }
         }
+        */
     }
 
     private void switchFrames()
