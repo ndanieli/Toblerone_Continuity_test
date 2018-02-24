@@ -80,7 +80,7 @@ public class FramesManager : MonoBehaviour {
     {
         if (frames[row, col] != null)
         {
-            Debug.Log("Need to switch between empty frame - " + frames[emptyFrame.row, emptyFrame.col] + " and not empty frame - " + frames[row, col]);
+            //Debug.Log("Need to switch between empty frame - " + frames[emptyFrame.row, emptyFrame.col] + " and not empty frame - " + frames[row, col]);
 
             // Check if hero is in the moving frame
             bool isActiveFrame = row == activeFrame.row && col == activeFrame.col;
