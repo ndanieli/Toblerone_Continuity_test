@@ -245,7 +245,7 @@ Prefab:
     - target: {fileID: 114484648939560244, guid: fadfc232b85929340b04da30d5140521,
         type: 2}
       propertyPath: borderLabels.Array.data[3]
-      value: -1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114484648939560244, guid: fadfc232b85929340b04da30d5140521,
         type: 2}
@@ -535,7 +535,7 @@ Prefab:
     - target: {fileID: 114484648939560244, guid: fadfc232b85929340b04da30d5140521,
         type: 2}
       propertyPath: borderLabels.Array.data[1]
-      value: -1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114484648939560244, guid: fadfc232b85929340b04da30d5140521,
         type: 2}
@@ -846,6 +846,7 @@ GameObject:
   - component: {fileID: 1160781757}
   - component: {fileID: 1160781756}
   - component: {fileID: 1160781760}
+  - component: {fileID: 1160781761}
   m_Layer: 0
   m_Name: Virgin
   m_TagString: Untagged
@@ -952,6 +953,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1160781761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160781755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f957303c1a447614f9268ac9829c5e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterManager: {fileID: 220776721}
 --- !u!1 &1171895089 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100020, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
@@ -1354,4 +1367,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2664eec123484449cdbdc0c9374152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPuzzleSolved: 0

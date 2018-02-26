@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour {
 
-    public bool isPuzzleSolved;
+    private bool isPuzzleSolved;
 
-	// Use this for initialization
-	void Start () {
+    public bool IsPuzzleSolved { get { return isPuzzleSolved; } }
+
+    // Use this for initialization
+    private void Start () {
         isPuzzleSolved = false;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void MarkPuzzleAsSolved()
+    {
+        isPuzzleSolved = true;
+    }
+
 }

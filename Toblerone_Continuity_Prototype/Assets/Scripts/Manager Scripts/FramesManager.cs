@@ -46,6 +46,201 @@ public class FramesManager : MonoBehaviour {
     public position PuzzleFrame { get { return puzzleFrame; } }
     public position EmptyFrame { get { return emptyFrame; } }
 
+    /**
+     * the virgin will always attempt to move as far away as possible from the hero
+     * if the opposite direction from which the hero came is unavailable, the virgin will 
+     * go to the first available from from LEFT-TOP-RIGHT-BOTTOM
+     * 
+     * The virgin cannot go to where the hero came from
+    **/
+    public void VirginEscapesToNextFrame(int heroDirection)
+    {
+        bool hasMoved = false;
+
+        int availableNextFrames = calculateAvailableNextFramesForVirgin();
+
+        // shouldn't happen, checking just in case
+        if (availableNextFrames <= 0)
+        {
+            Debug.Log("Escape has been triggered without an available adjacent frame");
+            throw new Exception("Escape has been triggered without an available adjacent frame");
+        }
+
+        // checks if the opposite direction is available
+        bool isOppositeAvailable;
+        switch (heroDirection)
+        {
+            case RIGHT:
+                isOppositeAvailable = availableNextFrames % 10 == 1;
+                if (isOppositeAvailable && !hasMoved)
+                {
+                    hasMoved = true;
+                    moveVirginToNextFrame(LEFT);
+                }
+                break;
+
+            case BOTTOM:
+                isOppositeAvailable = (availableNextFrames / 10) % 10 == 1;
+                if (isOppositeAvailable && !hasMoved)
+                {
+                    hasMoved = true;
+                    moveVirginToNextFrame(TOP);
+                }
+                break;
+
+            case LEFT:
+                isOppositeAvailable = (availableNextFrames / 100) % 10 == 1;
+                if (isOppositeAvailable && !hasMoved)
+                {
+                    hasMoved = true;
+                    moveVirginToNextFrame(RIGHT);
+                }
+                break;
+
+            case TOP:
+                isOppositeAvailable = (availableNextFrames / 1000) % 10 == 1;
+                if (isOppositeAvailable && !hasMoved)
+                {
+                    hasMoved = true;
+                    moveVirginToNextFrame(BOTTOM);
+                }
+                break;
+            default:
+                break;
+        }
+
+        // Reached if the opposite direction isn't available
+        int label = availableNextFrames % 10;
+
+        if (!hasMoved && label == 1 && heroDirection != LEFT)
+        {
+            moveVirginToNextFrame(LEFT);
+            hasMoved = true;
+        }
+
+        availableNextFrames /= 10;
+        label = availableNextFrames % 10;
+
+        if (!hasMoved && label == 1 && heroDirection != TOP)
+        {
+            moveVirginToNextFrame(TOP);
+            hasMoved = true;
+        }
+
+        availableNextFrames /= 10;
+        label = availableNextFrames % 10;
+
+        if (!hasMoved && label == 1 && heroDirection != RIGHT)
+        {
+            moveVirginToNextFrame(RIGHT);
+            hasMoved = true;
+        }
+
+        availableNextFrames /= 10;
+        label = availableNextFrames % 10;
+
+        if (!hasMoved && label == 1 && heroDirection != BOTTOM)
+        {
+            moveVirginToNextFrame(BOTTOM);
+            hasMoved = true;
+        }
+    }
+
+    private void moveVirginToNextFrame(int lEFT)
+    {
+        throw new NotImplementedException();
+    }
+
+    /**
+     *  checks if the virgin can escape to an adjacent frame from which the hero did NOT come from
+    **/
+    public bool CanVirginEscape(int heroDirection)
+    {
+        bool result = false;
+
+        int availalbeNextFrames = calculateAvailableNextFramesForVirgin();
+
+        int label = availalbeNextFrames % 10;
+
+        // Checks if the virgin can move left and if the hero didn't come from the left frame
+        if (label == 1 && heroDirection != LEFT)
+        {
+            result = true;
+        }
+
+        availalbeNextFrames /= 10;
+        label = availalbeNextFrames % 10;
+
+        // Checks if the virgin can move up and if the hero didn't come from the above frame
+        if (label == 1 && heroDirection != TOP)
+        {
+            result = true;
+        }
+
+        availalbeNextFrames /= 10;
+        label = availalbeNextFrames % 10;
+
+        // Checks if the virgin can move right and if the hero didn't come from the right frame
+        if (label == 1 && heroDirection != RIGHT)
+        {
+            result = true;
+        }
+
+        availalbeNextFrames /= 10;
+        label = availalbeNextFrames % 10;
+
+        // Checks if the virgin can move left and if the hero didn't come from the bottom frame
+        if (label == 1 && heroDirection != BOTTOM)
+        {
+            result = true;
+        }
+
+        return result;
+    }
+
+    /**
+     * returns a bitwise result of available frames that can be moved from the virgins' current location
+     * if the singles' digit is one - the virgin can move left
+     * if the tens' digit is one - the virgin can move up
+     * if the hundreds' digit is one - the virgin can move right
+     * if the thousands' digit is one - the virgin can move down
+    **/
+    private int calculateAvailableNextFramesForVirgin()
+    {
+        int result = 0;
+        int virginLeftLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[LEFT];
+        int virginTopLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[TOP];
+        int virginRightLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[RIGHT];
+        int virginBottomLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[BOTTOM];
+
+        Frame leftFrame = frames[virginFrame.row, virginFrame.col - 1].GetComponent<Frame>();
+        Frame topFrame = frames[virginFrame.row - 1, virginFrame.col].GetComponent<Frame>();
+        Frame rightFrame = frames[virginFrame.row, virginFrame.col + 1].GetComponent<Frame>();
+        Frame bottomFrame = frames[virginFrame.row + 1, virginFrame.col].GetComponent<Frame>();
+
+        if (leftFrame != null && virginLeftLabel == leftFrame.borderLabels[RIGHT])
+        {
+            result += 1;
+        }
+
+        if (topFrame != null && virginTopLabel == topFrame.borderLabels[BOTTOM])
+        {
+            result += 10;
+        }
+
+        if (rightFrame != null && virginRightLabel == rightFrame.borderLabels[LEFT])
+        {
+            result += 100;
+        }
+
+        if (bottomFrame != null && virginBottomLabel == bottomFrame.borderLabels[TOP])
+        {
+            result += 1000;
+        }
+
+        return result;
+    }
+
     // Use this for initialization
     void Start () {
         initFrameArray();
