@@ -969,6 +969,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232323201}
   - component: {fileID: 1232323200}
+  - component: {fileID: 1232323202}
   m_Layer: 0
   m_Name: FramesManager
   m_TagString: Untagged
@@ -987,6 +988,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c879343a4de8fa44a9594f7ba285454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterManager: {fileID: 220776721}
+  moveEmptyFrame: {fileID: 1232323202}
+  hero: {fileID: 1171895089}
+  Virgin: {fileID: 1160781755}
   rows: 2
   cols: 2
   initialHeroFrameRow: 0
@@ -997,8 +1002,6 @@ MonoBehaviour:
   initialVirginFrameColumn: 1
   initialPuzzleFrameRow: 0
   initialPuzzleFrameColumn: 0
-  hero: {fileID: 1171895089}
-  Virgin: {fileID: 1160781755}
 --- !u!4 &1232323201
 Transform:
   m_ObjectHideFlags: 0
@@ -1012,6 +1015,18 @@ Transform:
   m_Father: {fileID: 1871852381}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1232323202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1232323199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf7705b2a4b54c469f723c13b41ee6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameManager: {fileID: 1232323200}
 --- !u!1 &1469447805
 GameObject:
   m_ObjectHideFlags: 0

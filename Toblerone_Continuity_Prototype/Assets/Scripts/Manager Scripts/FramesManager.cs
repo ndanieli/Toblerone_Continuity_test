@@ -10,15 +10,19 @@ public class FramesManager : MonoBehaviour {
     public const int RIGHT = 2;
     public const int BOTTOM = 3;
 
-    public int rows, cols;
     public struct position
     {
         public int row, col;
     }
 
-    private position activeFrame;
-    private position virginFrame;
-    private position puzzleFrame;
+    //Game Objects that need to be defined in the heirarchy
+    public MasterManager masterManager;
+    public MoveEmptyFrame moveEmptyFrame;
+    public GameObject hero;
+    public GameObject Virgin;
+
+    //Initial values that are defined in the heirarchy
+    public int rows, cols;
     public int initialHeroFrameRow;
     public int initialHeroFrameColumn;
     public int initialEmptyFrameRow;
@@ -28,12 +32,19 @@ public class FramesManager : MonoBehaviour {
     public int initialPuzzleFrameRow;
     public int initialPuzzleFrameColumn;
 
-    public position emptyFrame;
-    public GameObject[,] frames;
-    public GameObject hero;
-    public GameObject Virgin;
-
-    GameObject tempFrame;
+    //Internal values that are used in other files
+    private GameObject[,] frames;
+    private position activeFrame;
+    private position virginFrame;
+    private position puzzleFrame;
+    private position emptyFrame;
+    
+    //public properties that allow to get, but not set the values
+    public GameObject[,] Frames { get { return frames; } }
+    public position ActiveFrame { get { return activeFrame; } }
+    public position VirginFrame { get { return virginFrame; } }
+    public position PuzzleFrame { get { return puzzleFrame; } }
+    public position EmptyFrame { get { return emptyFrame; } }
 
     // Use this for initialization
     void Start () {
@@ -45,104 +56,27 @@ public class FramesManager : MonoBehaviour {
         if (!GameObject.Find("CameraManager").GetComponent<CameraControl>().zoomIn) {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);
+                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col - 1);
+                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col - 1);
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                switchEmptyFrameLocation(emptyFrame.row - 1, emptyFrame.col);
+                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row - 1, emptyFrame.col);
             }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col + 1);
+                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col + 1);
             }
 
         }
     }
-
-    void initFrameArray()
-    {
-        frames = new GameObject[rows + 2, cols + 2];
-        for (int i = 1; i <= rows; i++)
-        {
-            for (int j = 1; j <= cols; j++)
-            {
-                frames[i, j] = GameObject.Find("Frame" + (i - 1) + (j - 1));
-            }
-        }
-
-        activeFrame.row = initialHeroFrameRow + 1;
-        activeFrame.col = initialHeroFrameColumn + 1;
-        emptyFrame.row = initialEmptyFrameRow + 1;
-        emptyFrame.col = initialEmptyFrameColumn + 1;
-        virginFrame.row = initialVirginFrameRow + 1;
-        virginFrame.col = initialVirginFrameColumn + 1;
-        puzzleFrame.row = initialPuzzleFrameRow;
-        puzzleFrame.col = initialVirginFrameColumn;
-    }
-
-    private void switchEmptyFrameLocation(int row, int col)
-    {
-        if (frames[row, col] != null)
-        {
-            //Debug.Log("Need to switch between empty frame - " + frames[emptyFrame.row, emptyFrame.col] + " and not empty frame - " + frames[row, col]);
-
-            // Check if hero is in the moving frame
-            bool isActiveFrame = row == activeFrame.row && col == activeFrame.col;
-
-            //check if V is in the moving frame
-            bool isVirginFrame = row == virginFrame.row && col == virginFrame.col;
-
-            // Switch the frames game position
-            GameObject empty = frames[emptyFrame.row, emptyFrame.col];
-            GameObject change = frames[row, col];
-
-            if (isActiveFrame)
-            {
-                Vector2 heroRelativePos = frames[row, col].transform.position - hero.gameObject.transform.position;
-                hero.gameObject.transform.position = (Vector2)frames[emptyFrame.row, emptyFrame.col].gameObject.transform.position - heroRelativePos;
-            }
-
-            if (isVirginFrame)
-            {
-                Vector2 virginRelativePos = frames[row, col].transform.position - Virgin.gameObject.transform.position;
-                Virgin.gameObject.transform.position = (Vector2)frames[emptyFrame.row, emptyFrame.col].gameObject.transform.position - virginRelativePos;
-            }
-
-            Vector2 emptyFramePosition = empty.GetComponent<Transform>().position;
-            empty.GetComponent<Transform>().position = change.GetComponent<Transform>().position;
-            change.GetComponent<Transform>().position = emptyFramePosition;
-
-
-            // Switch the frames array indices
-                 //switch active frame values if needed
-            if (isActiveFrame)
-            {
-                activeFrame.row = emptyFrame.row;
-                activeFrame.col = emptyFrame.col;
-            }
-                //switch virgin frame values if needed
-            if (isVirginFrame)
-            {
-                virginFrame.row = emptyFrame.row;
-                virginFrame.col = emptyFrame.col;
-            }
-
-            frames[row, col] = empty;
-            frames[emptyFrame.row, emptyFrame.col] = change;
-            emptyFrame.row = row;
-            emptyFrame.col = col;
-
-        }
-
-    }
-
+    
     public void SwitchHeroFrame(int borderSide)
     {
         int nextFrameRow = activeFrame.row;
@@ -176,6 +110,54 @@ public class FramesManager : MonoBehaviour {
             moveCameraToActiveFrame(nextFrameRow, nextFrameCol);
             changeActiveFrame(nextFrameRow, nextFrameCol);
         }
+    }
+
+    public void SwitchActiveFramePositionToEmptyFramePosition()
+    {
+        activeFrame.row = emptyFrame.row;
+        activeFrame.col = emptyFrame.col;
+    }
+
+    public void SwitchVirginFramePositionToEmptyFramePosition()
+    {
+        virginFrame.row = emptyFrame.row;
+        virginFrame.col = emptyFrame.col;
+    }
+
+    public void SwitchFramePositionWithEmptyFramePosition(int row, int col)
+    {
+        GameObject empty = frames[EmptyFrame.row, EmptyFrame.col];
+        GameObject change = frames[row, col];
+
+        Vector2 emptyFramePosition = empty.GetComponent<Transform>().position;
+        empty.GetComponent<Transform>().position = change.GetComponent<Transform>().position;
+        change.GetComponent<Transform>().position = emptyFramePosition;
+
+        frames[row, col] = empty;
+        frames[emptyFrame.row, emptyFrame.col] = change;
+        emptyFrame.row = row;
+        emptyFrame.col = col;
+    }
+
+    private void initFrameArray()
+    {
+        frames = new GameObject[rows + 2, cols + 2];
+        for (int i = 1; i <= rows; i++)
+        {
+            for (int j = 1; j <= cols; j++)
+            {
+                frames[i, j] = GameObject.Find("Frame" + (i - 1) + (j - 1));
+            }
+        }
+
+        activeFrame.row = initialHeroFrameRow + 1;
+        activeFrame.col = initialHeroFrameColumn + 1;
+        emptyFrame.row = initialEmptyFrameRow + 1;
+        emptyFrame.col = initialEmptyFrameColumn + 1;
+        virginFrame.row = initialVirginFrameRow + 1;
+        virginFrame.col = initialVirginFrameColumn + 1;
+        puzzleFrame.row = initialPuzzleFrameRow;
+        puzzleFrame.col = initialVirginFrameColumn;
     }
 
     private bool checkLabels(int borderSide, int nextFrameRow, int nextFrameCol)
