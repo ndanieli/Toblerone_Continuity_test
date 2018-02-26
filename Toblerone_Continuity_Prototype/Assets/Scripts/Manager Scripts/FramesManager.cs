@@ -18,12 +18,15 @@ public class FramesManager : MonoBehaviour {
 
     private position activeFrame;
     private position virginFrame;
+    private position puzzleFrame;
     public int initialHeroFrameRow;
     public int initialHeroFrameColumn;
     public int initialEmptyFrameRow;
     public int initialEmptyFrameColumn;
     public int initialVirginFrameRow;
     public int initialVirginFrameColumn;
+    public int initialPuzzleFrameRow;
+    public int initialPuzzleFrameColumn;
 
     public position emptyFrame;
     public GameObject[,] frames;
@@ -80,6 +83,8 @@ public class FramesManager : MonoBehaviour {
         emptyFrame.col = initialEmptyFrameColumn + 1;
         virginFrame.row = initialVirginFrameRow + 1;
         virginFrame.col = initialVirginFrameColumn + 1;
+        puzzleFrame.row = initialPuzzleFrameRow;
+        puzzleFrame.col = initialVirginFrameColumn;
     }
 
     private void switchEmptyFrameLocation(int row, int col)

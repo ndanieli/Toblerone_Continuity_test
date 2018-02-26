@@ -322,6 +322,49 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fadfc232b85929340b04da30d5140521, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &220776719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 220776720}
+  - component: {fileID: 220776721}
+  m_Layer: 0
+  m_Name: MasterManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &220776720
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 220776719}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1871852381}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &220776721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 220776719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ea62a1a3df9cf4182bc9ae506e9008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  framesManager: {fileID: 1232323200}
+  cameraManager: {fileID: 599467160}
+  puzzleManager: {fileID: 2110088505}
 --- !u!1 &242771149
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +995,8 @@ MonoBehaviour:
   initialEmptyFrameColumn: 0
   initialVirginFrameRow: 0
   initialVirginFrameColumn: 1
+  initialPuzzleFrameRow: 0
+  initialPuzzleFrameColumn: 0
   hero: {fileID: 1171895089}
   Virgin: {fileID: 1160781755}
 --- !u!4 &1232323201
@@ -1132,6 +1177,8 @@ Transform:
   m_Children:
   - {fileID: 1232323201}
   - {fileID: 599467161}
+  - {fileID: 220776720}
+  - {fileID: 2110088504}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1252,3 +1299,44 @@ GameObject:
   m_PrefabParentObject: {fileID: 1812126162821168, guid: fadfc232b85929340b04da30d5140521,
     type: 2}
   m_PrefabInternal: {fileID: 165977850}
+--- !u!1 &2110088503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2110088504}
+  - component: {fileID: 2110088505}
+  m_Layer: 0
+  m_Name: PuzzleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2110088504
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2110088503}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1871852381}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110088505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2110088503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2664eec123484449cdbdc0c9374152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPuzzleSolved: 0
