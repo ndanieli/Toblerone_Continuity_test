@@ -17,14 +17,18 @@ public class FramesManager : MonoBehaviour {
     }
 
     private position activeFrame;
+    private position virginFrame;
     public int initialHeroFrameRow;
     public int initialHeroFrameColumn;
     public int initialEmptyFrameRow;
     public int initialEmptyFrameColumn;
+    public int initialVirginFrameRow;
+    public int initialVirginFrameColumn;
 
     public position emptyFrame;
     public GameObject[,] frames;
     public GameObject hero;
+    public GameObject Virgin;
 
     GameObject tempFrame;
 
@@ -74,6 +78,8 @@ public class FramesManager : MonoBehaviour {
         activeFrame.col = initialHeroFrameColumn + 1;
         emptyFrame.row = initialEmptyFrameRow + 1;
         emptyFrame.col = initialEmptyFrameColumn + 1;
+        virginFrame.row = initialVirginFrameRow + 1;
+        virginFrame.col = initialVirginFrameColumn + 1;
     }
 
     private void switchEmptyFrameLocation(int row, int col)
@@ -85,6 +91,9 @@ public class FramesManager : MonoBehaviour {
             // Check if hero is in the moving frame
             bool isActiveFrame = row == activeFrame.row && col == activeFrame.col;
 
+            //check if V is in the moving frame
+            bool isVirginFrame = row == virginFrame.row && col == virginFrame.col;
+
             // Switch the frames game position
             GameObject empty = frames[emptyFrame.row, emptyFrame.col];
             GameObject change = frames[row, col];
@@ -92,8 +101,13 @@ public class FramesManager : MonoBehaviour {
             if (isActiveFrame)
             {
                 Vector2 heroRelativePos = frames[row, col].transform.position - hero.gameObject.transform.position;
-                //hero.gameObject.transform.position = frames[emptyFrame.row, emptyFrame.col].gameObject.transform.position;
                 hero.gameObject.transform.position = (Vector2)frames[emptyFrame.row, emptyFrame.col].gameObject.transform.position - heroRelativePos;
+            }
+
+            if (isVirginFrame)
+            {
+                Vector2 virginRelativePos = frames[row, col].transform.position - Virgin.gameObject.transform.position;
+                Virgin.gameObject.transform.position = (Vector2)frames[emptyFrame.row, emptyFrame.col].gameObject.transform.position - virginRelativePos;
             }
 
             Vector2 emptyFramePosition = empty.GetComponent<Transform>().position;
@@ -107,6 +121,12 @@ public class FramesManager : MonoBehaviour {
             {
                 activeFrame.row = emptyFrame.row;
                 activeFrame.col = emptyFrame.col;
+            }
+                //switch virgin frame values if needed
+            if (isVirginFrame)
+            {
+                virginFrame.row = emptyFrame.row;
+                virginFrame.col = emptyFrame.col;
             }
 
             frames[row, col] = empty;
