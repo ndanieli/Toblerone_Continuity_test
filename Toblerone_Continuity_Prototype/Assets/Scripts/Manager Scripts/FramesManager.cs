@@ -46,6 +46,41 @@ public class FramesManager : MonoBehaviour {
     public position PuzzleFrame { get { return puzzleFrame; } }
     public position EmptyFrame { get { return emptyFrame; } }
 
+
+    // Use this for initialization
+    void Start()
+    {
+        initFrameArray();
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (!GameObject.Find("CameraManager").GetComponent<CameraControl>().zoomIn)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col - 1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row - 1, emptyFrame.col);
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col + 1);
+            }
+
+        }
+    }
+
     /**
      * the virgin will always attempt to move as far away as possible from the hero
      * if the opposite direction from which the hero came is unavailable, the virgin will 
@@ -146,11 +181,6 @@ public class FramesManager : MonoBehaviour {
         }
     }
 
-    private void moveVirginToNextFrame(int lEFT)
-    {
-        throw new NotImplementedException();
-    }
-
     /**
      *  checks if the virgin can escape to an adjacent frame from which the hero did NOT come from
     **/
@@ -197,80 +227,6 @@ public class FramesManager : MonoBehaviour {
 
         return result;
     }
-
-    /**
-     * returns a bitwise result of available frames that can be moved from the virgins' current location
-     * if the singles' digit is one - the virgin can move left
-     * if the tens' digit is one - the virgin can move up
-     * if the hundreds' digit is one - the virgin can move right
-     * if the thousands' digit is one - the virgin can move down
-    **/
-    private int calculateAvailableNextFramesForVirgin()
-    {
-        int result = 0;
-        int virginLeftLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[LEFT];
-        int virginTopLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[TOP];
-        int virginRightLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[RIGHT];
-        int virginBottomLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[BOTTOM];
-
-        Frame leftFrame = frames[virginFrame.row, virginFrame.col - 1].GetComponent<Frame>();
-        Frame topFrame = frames[virginFrame.row - 1, virginFrame.col].GetComponent<Frame>();
-        Frame rightFrame = frames[virginFrame.row, virginFrame.col + 1].GetComponent<Frame>();
-        Frame bottomFrame = frames[virginFrame.row + 1, virginFrame.col].GetComponent<Frame>();
-
-        if (leftFrame != null && virginLeftLabel == leftFrame.borderLabels[RIGHT])
-        {
-            result += 1;
-        }
-
-        if (topFrame != null && virginTopLabel == topFrame.borderLabels[BOTTOM])
-        {
-            result += 10;
-        }
-
-        if (rightFrame != null && virginRightLabel == rightFrame.borderLabels[LEFT])
-        {
-            result += 100;
-        }
-
-        if (bottomFrame != null && virginBottomLabel == bottomFrame.borderLabels[TOP])
-        {
-            result += 1000;
-        }
-
-        return result;
-    }
-
-    // Use this for initialization
-    void Start () {
-        initFrameArray();
-    }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        if (!GameObject.Find("CameraManager").GetComponent<CameraControl>().zoomIn) {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);
-            }
-
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col - 1);
-            }
-
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row - 1, emptyFrame.col);
-            }
-
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col + 1);
-            }
-
-        }
-    }
     
     public void SwitchHeroFrame(int borderSide)
     {
@@ -304,6 +260,7 @@ public class FramesManager : MonoBehaviour {
             moveHeroToNextFrame(borderSide);
             moveCameraToActiveFrame(nextFrameRow, nextFrameCol);
             changeActiveFrame(nextFrameRow, nextFrameCol);
+            triggerVirginMovementIfNeeded(borderSide);
         }
     }
 
@@ -430,4 +387,106 @@ public class FramesManager : MonoBehaviour {
         }
     }
 
+    /**
+     * returns a bitwise result of available frames that can be moved from the virgins' current location
+     * if the singles' digit is one - the virgin can move left
+     * if the tens' digit is one - the virgin can move up
+     * if the hundreds' digit is one - the virgin can move right
+     * if the thousands' digit is one - the virgin can move down
+    **/
+    private int calculateAvailableNextFramesForVirgin()
+    {
+        int result = 0;
+        int virginLeftLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[LEFT];
+        int virginTopLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[TOP];
+        int virginRightLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[RIGHT];
+        int virginBottomLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[BOTTOM];
+
+
+        Frame leftFrame = frames[virginFrame.row, virginFrame.col - 1] != null ? frames[virginFrame.row, virginFrame.col - 1].GetComponent<Frame>() : null;
+        Frame topFrame = frames[virginFrame.row - 1, virginFrame.col] != null ? frames[virginFrame.row - 1, virginFrame.col].GetComponent<Frame>() : null;
+        Frame rightFrame = frames[virginFrame.row, virginFrame.col + 1] != null ? frames[virginFrame.row, virginFrame.col + 1].GetComponent<Frame>() : null;
+        Frame bottomFrame = frames[virginFrame.row + 1, virginFrame.col] != null ? frames[virginFrame.row + 1, virginFrame.col].GetComponent<Frame>() : null;
+
+        if (leftFrame != null && virginLeftLabel == leftFrame.borderLabels[RIGHT])
+        {
+            result += 1;
+        }
+
+        if (topFrame != null && virginTopLabel == topFrame.borderLabels[BOTTOM])
+        {
+            result += 10;
+        }
+
+        if (rightFrame != null && virginRightLabel == rightFrame.borderLabels[LEFT])
+        {
+            result += 100;
+        }
+
+        if (bottomFrame != null && virginBottomLabel == bottomFrame.borderLabels[TOP])
+        {
+            result += 1000;
+        }
+
+        return result;
+    }
+
+    private void moveVirginToNextFrame(int directionLabel)
+    {
+        int newVirginRow = virginFrame.row;
+        int newVirginCol = virginFrame.col;
+
+        switch (directionLabel)
+        {
+            case LEFT:
+                newVirginCol--;
+                break;
+
+            case TOP:
+                newVirginRow--;
+                break;
+
+            case RIGHT:
+                newVirginCol++;
+                break;
+
+            case BOTTOM:
+                newVirginRow++;
+                break;
+
+            default:
+                break;
+        }
+
+        Vector2 currentDiff = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().transform.position - Virgin.gameObject.transform.position;
+        Virgin.gameObject.transform.position = (Vector2)frames[newVirginRow, newVirginCol].GetComponent<Frame>().transform.position - currentDiff;
+
+        virginFrame.row = newVirginRow;
+        virginFrame.col = newVirginCol;
+    }
+
+    private void triggerVirginMovementIfNeeded(int borderSide)
+    {
+        switch (borderSide)
+        {
+            case LEFT:
+                masterManager.virgin.GetComponent<VirginMovement>().OnHeroEntersFrame(RIGHT);
+                break;
+
+            case TOP:
+                masterManager.virgin.GetComponent<VirginMovement>().OnHeroEntersFrame(BOTTOM);
+                break;
+
+            case RIGHT:
+                masterManager.virgin.GetComponent<VirginMovement>().OnHeroEntersFrame(LEFT);
+                break;
+
+            case BOTTOM:
+                masterManager.virgin.GetComponent<VirginMovement>().OnHeroEntersFrame(TOP);
+                break;
+
+            default:
+                break;
+        }
+    }
 }

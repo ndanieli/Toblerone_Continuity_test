@@ -8,6 +8,8 @@ public class MasterManager : MonoBehaviour {
     public FramesManager framesManager;
     public CameraControl cameraManager;
     public PuzzleManager puzzleManager;
+    public GameObject hero;
+    public GameObject virgin;
 
     public void KillHero()
     {

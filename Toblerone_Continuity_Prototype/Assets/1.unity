@@ -365,6 +365,8 @@ MonoBehaviour:
   framesManager: {fileID: 1232323200}
   cameraManager: {fileID: 599467160}
   puzzleManager: {fileID: 2110088505}
+  hero: {fileID: 1171895089}
+  virgin: {fileID: 1160781755}
 --- !u!1 &242771149
 GameObject:
   m_ObjectHideFlags: 0
