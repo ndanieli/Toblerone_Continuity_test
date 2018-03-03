@@ -279,6 +279,12 @@ public class FramesManager : MonoBehaviour {
         virginFrame.col = emptyFrame.col;
     }
 
+    public void SwitchPuzzleFramePositionToEmptyFramePosition()
+    {
+        puzzleFrame.row = emptyFrame.row;
+        puzzleFrame.col = emptyFrame.col;
+    }
+
     public void SwitchFramePositionWithEmptyFramePosition(int row, int col)
     {
         GameObject empty = frames[EmptyFrame.row, EmptyFrame.col];

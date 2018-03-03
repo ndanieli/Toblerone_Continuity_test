@@ -24,6 +24,11 @@ public class MoveEmptyFrame : MonoBehaviour {
                 frameManager.SwitchVirginFramePositionToEmptyFramePosition();
             }
 
+            if (isPuzzleFrame(row, col))
+            {
+                frameManager.SwitchPuzzleFramePositionToEmptyFramePosition();
+            }
+
             frameManager.SwitchFramePositionWithEmptyFramePosition(row, col);
         }
     }
@@ -36,5 +41,10 @@ public class MoveEmptyFrame : MonoBehaviour {
     private bool isVirginFrame(int row, int col)
     {
         return row == frameManager.VirginFrame.row && col == frameManager.VirginFrame.col;
+    }
+
+    private bool isPuzzleFrame(int row, int col)
+    {
+        return row == frameManager.PuzzleFrame.row && col == frameManager.PuzzleFrame.col;
     }
 }
