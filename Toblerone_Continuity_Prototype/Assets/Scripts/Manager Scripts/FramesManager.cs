@@ -260,7 +260,10 @@ public class FramesManager : MonoBehaviour {
             moveHeroToNextFrame(borderSide);
             moveCameraToActiveFrame(nextFrameRow, nextFrameCol);
             changeActiveFrame(nextFrameRow, nextFrameCol);
-            triggerVirginMovementIfNeeded(borderSide);
+            if (virginFrame.row == nextFrameRow && virginFrame.col == nextFrameCol)
+            {
+                triggerVirginMovementIfNeeded(borderSide);
+            }
         }
     }
 
