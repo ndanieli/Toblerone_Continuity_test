@@ -328,11 +328,11 @@ public class FramesManager : MonoBehaviour {
 
         Frame otherFrame = frames[nextFrameRow, nextFrameCol].GetComponent<Frame>();
 
-        if (otherFrame == null)
+        if (otherFrame == null || originalFrameLabel == -1)
         {
             return false;
         }
-
+                
         switch (borderSide)
         {
             case LEFT:
@@ -380,7 +380,7 @@ public class FramesManager : MonoBehaviour {
                 break;
 
             case TOP:
-                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x, hero.gameObject.transform.position.y - 5);
+                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x, hero.gameObject.transform.position.y + 10);
                 break;
 
             case RIGHT:
@@ -388,7 +388,7 @@ public class FramesManager : MonoBehaviour {
                 break;
 
             case BOTTOM:
-                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x, hero.gameObject.transform.position.y + 5);
+                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x, hero.gameObject.transform.position.y - 10);
                 break;
 
             default:
@@ -417,22 +417,22 @@ public class FramesManager : MonoBehaviour {
         Frame rightFrame = frames[virginFrame.row, virginFrame.col + 1] != null ? frames[virginFrame.row, virginFrame.col + 1].GetComponent<Frame>() : null;
         Frame bottomFrame = frames[virginFrame.row + 1, virginFrame.col] != null ? frames[virginFrame.row + 1, virginFrame.col].GetComponent<Frame>() : null;
 
-        if (leftFrame != null && virginLeftLabel == leftFrame.borderLabels[RIGHT])
+        if (leftFrame != null && virginLeftLabel != -1 && virginLeftLabel == leftFrame.borderLabels[RIGHT])
         {
             result += 1;
         }
 
-        if (topFrame != null && virginTopLabel == topFrame.borderLabels[BOTTOM])
+        if (topFrame != null && virginTopLabel != -1 && virginTopLabel == topFrame.borderLabels[BOTTOM])
         {
             result += 10;
         }
 
-        if (rightFrame != null && virginRightLabel == rightFrame.borderLabels[LEFT])
+        if (rightFrame != null && virginRightLabel != -1 && virginRightLabel == rightFrame.borderLabels[LEFT])
         {
             result += 100;
         }
 
-        if (bottomFrame != null && virginBottomLabel == bottomFrame.borderLabels[TOP])
+        if (bottomFrame != null && virginBottomLabel != -1 && virginBottomLabel == bottomFrame.borderLabels[TOP])
         {
             result += 1000;
         }

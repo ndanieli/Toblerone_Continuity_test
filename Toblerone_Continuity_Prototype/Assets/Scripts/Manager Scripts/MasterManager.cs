@@ -13,11 +13,11 @@ public class MasterManager : MonoBehaviour {
 
     public void KillHero()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public void LevelCompleted()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }
