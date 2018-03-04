@@ -13,6 +13,7 @@ public class CameraControl : MonoBehaviour {
     // Use this for initialization
     void Start () {
         zoomIn = false;
+        zoomInOut();
         
         // stores the hero's velocity and angular velocity for un-freezing
         linearBackup = new Vector2();

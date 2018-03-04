@@ -739,7 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomOutCamera: {fileID: 54084191}
-  zoomIn: 0
+  zoomIn: 1
   hero: {fileID: 1171895089}
 --- !u!4 &599467161
 Transform:
@@ -1377,3 +1377,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2664eec123484449cdbdc0c9374152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzleDependency: 
