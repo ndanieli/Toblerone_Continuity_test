@@ -38,7 +38,7 @@ public class VirginMovement : MonoBehaviour {
 
     private bool isPuzzleSolved()
     {
-        return masterManager.puzzleManager.IsPuzzleSolved;
+        return masterManager.puzzleManager.IsLevelPuzzleSolved;
     }
 
     private void killHero()
