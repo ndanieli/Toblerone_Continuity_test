@@ -20,8 +20,10 @@ public class FramesManager : MonoBehaviour {
     public MoveEmptyFrame moveEmptyFrame;
     public GameObject hero;
     public GameObject Virgin;
+    public MoveEmptyFrameFirstPlayable moveEmptyFrameFirstPlayable;
 
     //Initial values that are defined in the heirarchy
+    public int levelNum;
     public int rows, cols;
     public int initialHeroFrameRow;
     public int initialHeroFrameColumn;
@@ -56,29 +58,60 @@ public class FramesManager : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!GameObject.Find("CameraManager").GetComponent<CameraControl>().zoomIn)
+        if (levelNum != 4)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (!GameObject.Find("CameraManager").GetComponent<CameraControl>().zoomIn)
             {
-                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);
-            }
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);
+                }
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col - 1);
-            }
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col - 1);
+                }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row - 1, emptyFrame.col);
-            }
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row - 1, emptyFrame.col);
+                }
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col + 1);
-            }
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col + 1);
+                }
 
+            }
         }
+        //if in first playable level
+        else
+        {
+            if (!GameObject.Find("CameraManager").GetComponent<CameraControl>().zoomIn)
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    moveEmptyFrameFirstPlayable.switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);
+                }
+
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    moveEmptyFrameFirstPlayable.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col - 1);
+                }
+
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    moveEmptyFrameFirstPlayable.switchEmptyFrameLocation(emptyFrame.row - 1, emptyFrame.col);
+                }
+
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    moveEmptyFrameFirstPlayable.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col + 1);
+                }
+
+            }
+        }
+        
     }
 
     /**
@@ -317,8 +350,8 @@ public class FramesManager : MonoBehaviour {
         emptyFrame.col = initialEmptyFrameColumn + 1;
         virginFrame.row = initialVirginFrameRow + 1;
         virginFrame.col = initialVirginFrameColumn + 1;
-        puzzleFrame.row = initialPuzzleFrameRow;
-        puzzleFrame.col = initialVirginFrameColumn;
+        puzzleFrame.row = initialPuzzleFrameRow + 1;
+        puzzleFrame.col = initialPuzzleFrameColumn + 1;
     }
 
     private bool checkLabels(int borderSide, int nextFrameRow, int nextFrameCol)

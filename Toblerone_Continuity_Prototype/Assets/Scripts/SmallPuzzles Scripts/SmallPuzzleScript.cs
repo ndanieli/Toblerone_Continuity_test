@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,15 +15,31 @@ public class SmallPuzzleScript : MonoBehaviour
         isSmallPuzzleSolved = false;
     }
 
-    public void OnSmallPuzzleTrigger()
+    public void OnSmallPuzzleTriggerToSolve()
     {
         if (!isSmallPuzzleSolved)
         {
+            //Debug.Log("updated solved");
             if (puzzleManager.smallPuzzleCanBeSolved(SmallPuzzleIndicator))
             {
                 solveSmallPuzzle();
             }
         }
+    }
+
+    public void OnSmallPuzzleTriggerToUnsolve()
+    {
+        if (isSmallPuzzleSolved)
+        {
+            //Debug.Log("updated unsolved");
+            unsolveSmallPuzzle();
+        }
+    }
+
+    private void unsolveSmallPuzzle()
+    {
+        isSmallPuzzleSolved = false;
+        puzzleManager.markSmallPuzzleAsUnsolved(SmallPuzzleIndicator);
     }
 
     private void solveSmallPuzzle()

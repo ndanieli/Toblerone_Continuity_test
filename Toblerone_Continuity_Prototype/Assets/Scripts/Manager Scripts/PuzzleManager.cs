@@ -28,7 +28,7 @@ public class PuzzleManager : MonoBehaviour
         //in case there are no puzzles in the scene
         if (numberOfPuzzles == 0)
         {
-            markAllPuzzlesAsSolved();
+            markLevelPuzzleAsSolved();
         }
 
         initializeSmallPuzzlesStatusArray();
@@ -38,7 +38,7 @@ public class PuzzleManager : MonoBehaviour
     {
         if (numberOfSolvedPuzzles == numberOfPuzzles)
         {
-            markAllPuzzlesAsSolved();
+            markLevelPuzzleAsSolved();
         }
     }
 
@@ -51,9 +51,25 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    private void markAllPuzzlesAsSolved()
+    public void markSmallPuzzleAsUnsolved(int puzzleIndicator)
+    {
+        if (smallPuzzlesStatus[puzzleIndicator])
+        {
+            smallPuzzlesStatus[puzzleIndicator] = false;
+            numberOfSolvedPuzzles--;
+            isLevelPuzzleSolved = false;
+        }
+
+    }
+
+    private void markLevelPuzzleAsSolved()
     {
         isLevelPuzzleSolved = true;
+    }
+
+    private void markLevelPuzzleAsUnsolved()
+    {
+        isLevelPuzzleSolved = false;
     }
 
     /**
@@ -128,4 +144,6 @@ public class PuzzleManager : MonoBehaviour
     {
         return puzzleDependency[puzzleIndicator];
     }
+
+    
 }

@@ -1740,6 +1740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232323201}
   - component: {fileID: 1232323200}
+  - component: {fileID: 1232323203}
   - component: {fileID: 1232323202}
   m_Layer: 0
   m_Name: FramesManager
@@ -1760,9 +1761,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterManager: {fileID: 220776721}
-  moveEmptyFrame: {fileID: 1232323202}
+  moveEmptyFrame: {fileID: 1232323203}
   hero: {fileID: 1171895089}
   Virgin: {fileID: 1160781755}
+  moveEmptyFrameFirstPlayable: {fileID: 1232323202}
+  levelNum: 4
   rows: 2
   cols: 3
   initialHeroFrameRow: 0
@@ -1794,10 +1797,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 1232323199}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5957482f088454fb1f0bd29067e58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameManager: {fileID: 1232323200}
+  firstPlayableLevelSmallPuzzle0: {fileID: 2110088506}
+--- !u!114 &1232323203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1232323199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: daf7705b2a4b54c469f723c13b41ee6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   frameManager: {fileID: 1232323200}
+--- !u!1 &1308653985 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1482268769999616, guid: fadfc232b85929340b04da30d5140521,
+    type: 2}
+  m_PrefabInternal: {fileID: 165977850}
+--- !u!114 &1308653986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1308653985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b41478f2b67e640a3a6b1fa1d16ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzleManager: {fileID: 2110088505}
+  SmallPuzzleIndicator: 0
 --- !u!1 &1429952454
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,6 +2374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2110088504}
   - component: {fileID: 2110088505}
+  - component: {fileID: 2110088506}
   m_Layer: 0
   m_Name: PuzzleManager
   m_TagString: Untagged
@@ -2371,4 +2406,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2664eec123484449cdbdc0c9374152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleDependency: 
+  puzzleDependency: 00
+--- !u!114 &2110088506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2110088503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5918556152fee4daafd3a9bd1f13bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smallPuzzleScript: {fileID: 1308653986}
+  frameManager: {fileID: 1232323200}
+  currentRow: 0
+  currentCol: 1
