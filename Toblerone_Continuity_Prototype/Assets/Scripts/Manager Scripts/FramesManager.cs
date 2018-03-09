@@ -56,7 +56,7 @@ public class FramesManager : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (levelNum != 4)
         {
