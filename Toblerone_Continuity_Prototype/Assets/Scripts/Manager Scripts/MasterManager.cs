@@ -8,16 +8,19 @@ public class MasterManager : MonoBehaviour {
     public FramesManager framesManager;
     public CameraControl cameraManager;
     public PuzzleManager puzzleManager;
+    public ImageManager imageManager;
     public GameObject hero;
     public GameObject virgin;
 
     public void KillHero()
     {
-        //throw new NotImplementedException();
+        Debug.Log("Kill Hero");
+        imageManager.EnableScreenLoseImage();
     }
 
     public void LevelCompleted()
     {
-        //throw new NotImplementedException();
+        Debug.Log("Level completed");
+        imageManager.EnableScreenWinImage();
     }
 }

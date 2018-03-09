@@ -421,7 +421,7 @@ public class FramesManager : MonoBehaviour {
                 break;
 
             case BOTTOM:
-                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x, hero.gameObject.transform.position.y - 10);
+                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x, hero.gameObject.transform.position.y - 5);
                 break;
 
             default:
