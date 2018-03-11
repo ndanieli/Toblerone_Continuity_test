@@ -9,18 +9,23 @@ public class VirginMovement : MonoBehaviour {
     {
         if (canEscape(heroDirection))
         {
+            //Debug.Log("Can escape");
             escape(heroDirection);
         }
         else
         {
+            //Debug.Log("Can't escape");
             if (isInPuzzleRoom())
             {
+                //Debug.Log("In Puzzle Room");
                 if (isPuzzleSolved())
                 {
+                    //Debug.Log("puzzle solved");
                     levelCompleted();
                 }
                 else
                 {
+                    //Debug.Log("puzzle not solved");
                     killHero();
                 }
             }
