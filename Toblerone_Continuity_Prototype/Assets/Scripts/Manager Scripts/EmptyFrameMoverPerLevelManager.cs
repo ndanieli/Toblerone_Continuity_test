@@ -15,7 +15,8 @@ public class EmptyFrameMoverPerLevelManager : MonoBehaviour {
         switch (masterManager.LevelNumber)
         {
             case FIRST_PLAYABLE:
-                moveEmptyFrameFirstPlayable.switchEmptyFrameLocation(row, col);
+                moveEmptyFrameGeneral.switchEmptyFrameLocation(row, col);
+                moveEmptyFrameFirstPlayable.TriggerfirstPlayablePuzzle(row, col);
                 break;
 
             default:
