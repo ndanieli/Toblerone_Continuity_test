@@ -17,13 +17,11 @@ public class FramesManager : MonoBehaviour {
 
     //Game Objects that need to be defined in the heirarchy
     public MasterManager masterManager;
-    public MoveEmptyFrame moveEmptyFrame;
     public GameObject hero;
     public GameObject Virgin;
-    public MoveEmptyFrameFirstPlayable moveEmptyFrameFirstPlayable;
+    public EmptyFrameMoverPerLevelManager emptyFrameMoverPerLevelManager;
 
     //Initial values that are defined in the heirarchy
-    public int levelNum;
     public int rows, cols;
     public int initialHeroFrameRow;
     public int initialHeroFrameColumn;
@@ -58,60 +56,29 @@ public class FramesManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (levelNum != 4)
+        if (!GameObject.Find("CameraManager").GetComponent<CameraControl>().zoomIn)
         {
-            if (!GameObject.Find("CameraManager").GetComponent<CameraControl>().zoomIn)
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);
-                }
-
-                if (Input.GetKeyDown(KeyCode.RightArrow))
-                {
-                    moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col - 1);
-                }
-
-                if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row - 1, emptyFrame.col);
-                }
-
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    moveEmptyFrame.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col + 1);
-                }
-
+                emptyFrameMoverPerLevelManager.OnEmptyFrameMoved(emptyFrame.row + 1, emptyFrame.col);
             }
-        }
-        //if in first playable level
-        else
-        {
-            if (!GameObject.Find("CameraManager").GetComponent<CameraControl>().zoomIn)
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    moveEmptyFrameFirstPlayable.switchEmptyFrameLocation(emptyFrame.row + 1, emptyFrame.col);
-                }
-
-                if (Input.GetKeyDown(KeyCode.RightArrow))
-                {
-                    moveEmptyFrameFirstPlayable.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col - 1);
-                }
-
-                if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    moveEmptyFrameFirstPlayable.switchEmptyFrameLocation(emptyFrame.row - 1, emptyFrame.col);
-                }
-
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    moveEmptyFrameFirstPlayable.switchEmptyFrameLocation(emptyFrame.row, emptyFrame.col + 1);
-                }
-
+                emptyFrameMoverPerLevelManager.OnEmptyFrameMoved(emptyFrame.row, emptyFrame.col - 1);
             }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                emptyFrameMoverPerLevelManager.OnEmptyFrameMoved(emptyFrame.row - 1, emptyFrame.col);
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                emptyFrameMoverPerLevelManager.OnEmptyFrameMoved(emptyFrame.row, emptyFrame.col + 1);
+            }
+
         }
-        
     }
 
     /**

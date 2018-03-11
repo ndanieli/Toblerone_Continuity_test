@@ -11,6 +11,7 @@ public class MasterManager : MonoBehaviour {
     public ImageManager imageManager;
     public GameObject hero;
     public GameObject virgin;
+    public int LevelNumber;
 
     public void KillHero()
     {

@@ -890,6 +890,7 @@ MonoBehaviour:
   imageManager: {fileID: 1806655095}
   hero: {fileID: 1171895089}
   virgin: {fileID: 166226909}
+  LevelNumber: 4
 --- !u!1 &242771149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,11 +1928,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterManager: {fileID: 220776721}
-  moveEmptyFrame: {fileID: 1232323203}
   hero: {fileID: 1171895089}
   Virgin: {fileID: 166226909}
-  moveEmptyFrameFirstPlayable: {fileID: 1232323202}
-  levelNum: 4
+  emptyFrameMoverPerLevelManager: {fileID: 1432821444}
   rows: 2
   cols: 3
   initialHeroFrameRow: 0
@@ -1951,7 +1950,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.16751063, y: 1.08, z: 4.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1432821441}
   m_Father: {fileID: 1871852381}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2144,6 +2144,76 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1429952454}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1432821440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1432821441}
+  - component: {fileID: 1432821444}
+  - component: {fileID: 1432821443}
+  - component: {fileID: 1432821442}
+  m_Layer: 0
+  m_Name: EmptyFrameMoverPerLevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1432821441
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432821440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1232323201}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1432821442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432821440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5957482f088454fb1f0bd29067e58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameManager: {fileID: 1232323200}
+  firstPlayableLevelSmallPuzzle0: {fileID: 2110088506}
+--- !u!114 &1432821443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432821440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf7705b2a4b54c469f723c13b41ee6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameManager: {fileID: 1232323200}
+--- !u!114 &1432821444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432821440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abe8a88820d88848867d64313b59181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveEmptyFrameGeneral: {fileID: 1432821443}
+  moveEmptyFrameFirstPlayable: {fileID: 1432821442}
+  masterManager: {fileID: 220776721}
 --- !u!4 &1438233892 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4253504797087498, guid: fadfc232b85929340b04da30d5140521,
