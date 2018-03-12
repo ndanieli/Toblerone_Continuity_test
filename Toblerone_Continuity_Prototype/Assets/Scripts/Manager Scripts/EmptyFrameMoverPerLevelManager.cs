@@ -9,6 +9,6 @@ public class EmptyFrameMoverPerLevelManager : MonoBehaviour
 
     public void OnEmptyFrameMoved(int row, int col)
     {
-        moveEmptyFrame.SwitchEmptyFrameLocation(row, col);
+        moveEmptyFrame.switchEmptyFrameLocation(row, col);
     }
 }
