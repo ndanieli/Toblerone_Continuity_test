@@ -6,7 +6,7 @@ public class MoveEmptyFrame : MonoBehaviour {
 
     public FramesManager frameManager;
 
-    public void switchEmptyFrameLocation(int row, int col)
+    public virtual void switchEmptyFrameLocation(int row, int col)
     {
         if (frameManager.Frames[row, col] != null)
         {
@@ -33,17 +33,17 @@ public class MoveEmptyFrame : MonoBehaviour {
         }
     }
 
-    private bool isActiveFrame (int row, int col)
+    protected bool isActiveFrame (int row, int col)
     {
         return row == frameManager.ActiveFrame.row && col == frameManager.ActiveFrame.col;
     }
 
-    private bool isVirginFrame(int row, int col)
+    protected bool isVirginFrame(int row, int col)
     {
         return row == frameManager.VirginFrame.row && col == frameManager.VirginFrame.col;
     }
 
-    private bool isPuzzleFrame(int row, int col)
+    protected bool isPuzzleFrame(int row, int col)
     {
         return row == frameManager.PuzzleFrame.row && col == frameManager.PuzzleFrame.col;
     }

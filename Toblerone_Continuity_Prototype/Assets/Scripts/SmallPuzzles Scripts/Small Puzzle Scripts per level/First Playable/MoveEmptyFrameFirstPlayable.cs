@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveEmptyFrameFirstPlayable : MonoBehaviour {
+public class MoveEmptyFrameFirstPlayable : MoveEmptyFrame{
 
-    public FramesManager frameManager;
     public FirstPlayableLevelSmallPuzzle0 firstPlayableLevelSmallPuzzle0;
 
-    
+    public override void switchEmptyFrameLocation(int row, int col)
+    {
+        base.switchEmptyFrameLocation(row,col);
+        TriggerfirstPlayablePuzzle(row, col);
+    }
+
     public void TriggerfirstPlayablePuzzle(int row, int col)
     {
 

@@ -2153,7 +2153,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1432821441}
   - component: {fileID: 1432821444}
-  - component: {fileID: 1432821443}
   - component: {fileID: 1432821442}
   m_Layer: 0
   m_Name: EmptyFrameMoverPerLevelManager
@@ -2188,18 +2187,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frameManager: {fileID: 1232323200}
   firstPlayableLevelSmallPuzzle0: {fileID: 2110088506}
---- !u!114 &1432821443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1432821440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daf7705b2a4b54c469f723c13b41ee6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frameManager: {fileID: 1232323200}
 --- !u!114 &1432821444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2211,9 +2198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abe8a88820d88848867d64313b59181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveEmptyFrameGeneral: {fileID: 1432821443}
-  moveEmptyFrameFirstPlayable: {fileID: 1432821442}
-  masterManager: {fileID: 220776721}
+  moveEmptyFrame: {fileID: 1432821442}
 --- !u!4 &1438233892 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4253504797087498, guid: fadfc232b85929340b04da30d5140521,
