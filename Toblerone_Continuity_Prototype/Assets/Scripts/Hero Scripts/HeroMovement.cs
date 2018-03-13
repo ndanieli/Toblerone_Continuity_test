@@ -31,39 +31,51 @@ public class HeroMovement : MonoBehaviour {
     // Update is called once per frame
     private void Update()
     {
+        /* Code to make the hero jump
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && grounded && cameraControl.zoomIn)
         {
             jump = true;
         }
+        */
     }
 
     private void FixedUpdate()
     {
         if (cameraControl.zoomIn)
         {
-            float h = Input.GetAxis("Horizontal");
+            float userLeftRightInput = Input.GetAxis("Horizontal");
+            float userUpDownInput = Input.GetAxis("Vertical");
 
-            anim.SetFloat("Speed", Mathf.Abs(h));
+            anim.SetFloat("Speed", Mathf.Abs(userLeftRightInput));
 
-            if (h * rb2d.velocity.x < maxSpeed)
-                rb2d.AddForce(Vector2.right * h * moveForce);
+            if (userLeftRightInput * rb2d.velocity.x < maxSpeed)
+                rb2d.AddForce(Vector2.right * userLeftRightInput * moveForce);
 
             if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
                 rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 
-            if (h > 0 && !facingRight)
+            if (userUpDownInput * rb2d.velocity.y < maxSpeed)
+                rb2d.AddForce(Vector2.up * userUpDownInput * moveForce);
+
+            if (Mathf.Abs(rb2d.velocity.y) > maxSpeed)
+                rb2d.velocity = new Vector2(rb2d.velocity.x, Mathf.Sign(rb2d.velocity.y) * maxSpeed);
+
+            // Change hero facing direction left / right
+            if (userLeftRightInput > 0 && !facingRight)
                 flip();
-            else if (h < 0 && facingRight)
+            else if (userLeftRightInput < 0 && facingRight)
                 flip();
 
+            /* Code to make the hero jump
             if (jump)
             {
                 anim.SetTrigger("Jump");
                 rb2d.AddForce(new Vector2(0f, jumpForce));
                 jump = false;
             }
+            */
         }
     }
 
