@@ -35,13 +35,23 @@ public class FramesManager : MonoBehaviour {
     //Internal values that are used in other files
     private GameObject[,] frames;
     private position activeFrame;
+    private position previousHeroFrame;
     private position virginFrame;
     private position puzzleFrame;
     private position emptyFrame;
+    private Vector2 heroRelativePos;
+    private Dictionary<int, int> oppositeDirectionsDict = new Dictionary<int, int>()
+    {
+        {RIGHT,LEFT},
+        {LEFT,RIGHT},
+        {TOP,BOTTOM},
+        {BOTTOM,TOP}
+    };
     
     //public properties that allow to get, but not set the values
     public GameObject[,] Frames { get { return frames; } }
     public position ActiveFrame { get { return activeFrame; } }
+    public position PreviousHeroFrame { get { return previousHeroFrame; } }
     public position VirginFrame { get { return virginFrame; } }
     public position PuzzleFrame { get { return puzzleFrame; } }
     public position EmptyFrame { get { return emptyFrame; } }
@@ -230,6 +240,9 @@ public class FramesManager : MonoBehaviour {
     
     public void SwitchHeroFrame(int borderSide)
     {
+        previousHeroFrame = activeFrame;
+        Debug.Log("SWITCH HERO FRAME TRIGGERED");
+        PrintFramePosition(previousHeroFrame);
         int nextFrameRow = activeFrame.row;
         int nextFrameCol = activeFrame.col;
 
@@ -319,6 +332,10 @@ public class FramesManager : MonoBehaviour {
         virginFrame.col = initialVirginFrameColumn + 1;
         puzzleFrame.row = initialPuzzleFrameRow + 1;
         puzzleFrame.col = initialPuzzleFrameColumn + 1;
+        previousHeroFrame.row = -1;
+        previousHeroFrame.col = -1;
+        heroRelativePos = Vector2.zero;
+        heroRelativePos = frames[initialHeroFrameRow + 1, initialHeroFrameColumn + 1].transform.position - hero.gameObject.transform.position;
     }
 
     private bool checkLabels(int borderSide, int nextFrameRow, int nextFrameCol)
@@ -332,29 +349,7 @@ public class FramesManager : MonoBehaviour {
         {
             return false;
         }
-                
-        switch (borderSide)
-        {
-            case LEFT:
-                otherFrameLabel = otherFrame.borderLabels[RIGHT];
-                break;
-
-            case TOP:
-                otherFrameLabel = otherFrame.borderLabels[BOTTOM];
-                break;
-
-            case RIGHT:
-                otherFrameLabel = otherFrame.borderLabels[LEFT];
-                break;
-
-            case BOTTOM:
-                otherFrameLabel = otherFrame.borderLabels[TOP];
-                break;
-
-            default:
-                break;
-        }
-
+        otherFrameLabel = otherFrame.borderLabels[oppositeDirectionsDict[borderSide]];
         return originalFrameLabel == otherFrameLabel;
 
     }
@@ -497,5 +492,20 @@ public class FramesManager : MonoBehaviour {
             default:
                 break;
         }
+    }
+    public void PlaceHeroAfterDeath()
+    {
+        hero.gameObject.transform.position = (Vector2)frames[previousHeroFrame.row, previousHeroFrame.col].gameObject.transform.position - heroRelativePos;
+        moveCameraToActiveFrame(previousHeroFrame.row, previousHeroFrame.col);
+        changeActiveFrame(previousHeroFrame.row, previousHeroFrame.col);
+        previousHeroFrame.row = -1;
+        previousHeroFrame.col = -1;
+        PrintFramePosition(activeFrame);
+    }
+    
+    // Debug Frame Position
+    private void PrintFramePosition(position pos)
+    {
+        Debug.Log(" ROW : " + pos.row + " COL : " + pos.col);
     }
 }

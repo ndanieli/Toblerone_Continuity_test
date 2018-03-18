@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MasterManager : MonoBehaviour {
@@ -9,6 +10,7 @@ public class MasterManager : MonoBehaviour {
     public CameraControl cameraManager;
     public PuzzleManager puzzleManager;
     public ImageManager imageManager;
+    public UIManager UIManager;
     public GameObject hero;
     public GameObject virgin;
     public int LevelNumber;
@@ -17,11 +19,24 @@ public class MasterManager : MonoBehaviour {
     {
         Debug.Log("Kill Hero");
         imageManager.EnableScreenLoseImage();
+        GameOverScreen();
     }
 
     public void LevelCompleted()
     {
         Debug.Log("Level completed");
         imageManager.EnableScreenWinImage();
+    }
+
+    public void GameOverScreen()
+    {
+        UIManager.ShowGameOverPanel();
+    }
+
+    public void RespawnHeroAfterDeath()
+    {
+        framesManager.PlaceHeroAfterDeath();
+        UIManager.HideGameOverPanel();
+        imageManager.DisableScreenLoseImage();
     }
 }

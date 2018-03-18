@@ -23,4 +23,14 @@ public class ImageManager : MonoBehaviour {
     {
         EndScreenLose.GetComponent<Image>().enabled = true;
     }
+
+    public void DisableScreenWinImage()
+    {
+        EndScreenWin.GetComponent<Image>().enabled = false;
+    }
+
+    public void DisableScreenLoseImage()
+    {
+        EndScreenLose.GetComponent<Image>().enabled = false;
+    }
 }
