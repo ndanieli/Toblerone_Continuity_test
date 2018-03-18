@@ -7,6 +7,10 @@ public class ImageManager : MonoBehaviour {
 
     public GameObject EndScreenWin;
     public GameObject EndScreenLose;
+    public Sprite SideDoorClosed;
+    public Sprite SideDoorOpen;
+    public Sprite TopDoorClosed;
+    public Sprite TopDoorOpen;
 
     // Use this for initialization
     void Start () {

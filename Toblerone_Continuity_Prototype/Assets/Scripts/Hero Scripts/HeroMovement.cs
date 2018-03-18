@@ -16,7 +16,7 @@ public class HeroMovement : MonoBehaviour {
     public CameraControl cameraControl;
 
 
-    private bool grounded = false;
+    //private bool grounded = false;
     private Animator anim;
     private Rigidbody2D rb2d;
 

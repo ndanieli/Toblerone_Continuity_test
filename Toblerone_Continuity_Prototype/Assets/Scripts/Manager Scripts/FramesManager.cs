@@ -241,8 +241,8 @@ public class FramesManager : MonoBehaviour {
     public void SwitchHeroFrame(int borderSide)
     {
         previousHeroFrame = activeFrame;
-        Debug.Log("SWITCH HERO FRAME TRIGGERED");
-        PrintFramePosition(previousHeroFrame);
+        //Debug.Log("SWITCH HERO FRAME TRIGGERED");
+        //PrintFramePosition(previousHeroFrame);
         int nextFrameRow = activeFrame.row;
         int nextFrameCol = activeFrame.col;
 
@@ -367,6 +367,7 @@ public class FramesManager : MonoBehaviour {
 
     private void moveHeroToNextFrame(int borderSide)
     {
+        //Debug.Log("Activated moveHeroToNextFrame");
         switch (borderSide)
         {
             case LEFT:
@@ -382,7 +383,7 @@ public class FramesManager : MonoBehaviour {
                 break;
 
             case BOTTOM:
-                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x, hero.gameObject.transform.position.y - 7);
+                hero.gameObject.transform.position = new Vector2(hero.gameObject.transform.position.x, hero.gameObject.transform.position.y - 10);
                 break;
 
             default:
