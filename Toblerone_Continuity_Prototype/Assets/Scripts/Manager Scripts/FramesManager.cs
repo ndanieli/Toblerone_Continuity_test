@@ -334,7 +334,6 @@ public class FramesManager : MonoBehaviour {
         puzzleFrame.col = initialPuzzleFrameColumn + 1;
         previousHeroFrame.row = -1;
         previousHeroFrame.col = -1;
-        heroRelativePos = Vector2.zero;
         heroRelativePos = frames[initialHeroFrameRow + 1, initialHeroFrameColumn + 1].transform.position - hero.gameObject.transform.position;
     }
 
