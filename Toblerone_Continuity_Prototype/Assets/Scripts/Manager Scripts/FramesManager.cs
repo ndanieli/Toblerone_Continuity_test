@@ -500,7 +500,7 @@ public class FramesManager : MonoBehaviour {
         changeActiveFrame(previousHeroFrame.row, previousHeroFrame.col);
         previousHeroFrame.row = -1;
         previousHeroFrame.col = -1;
-        PrintFramePosition(activeFrame);
+        //PrintFramePosition(activeFrame);
     }
     
     // Debug Frame Position
