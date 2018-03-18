@@ -8,7 +8,6 @@ public class Border : MonoBehaviour
     public int borderSide;
     public Frame frame;
     private bool isTriggered;
-    private MasterManager masterManager;
 
     void Start()
     {
@@ -19,7 +18,6 @@ public class Border : MonoBehaviour
         }
 
         isTriggered = false;
-        masterManager = FindObjectOfType<MasterManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
