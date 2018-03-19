@@ -7,6 +7,8 @@ public class ImageManager : MonoBehaviour {
 
     public GameObject EndScreenWin;
     public GameObject EndScreenLose;
+    public Sprite knight_without_sword;
+    public Sprite knight_with_sword;
 
     // Use this for initialization
     void Start () {

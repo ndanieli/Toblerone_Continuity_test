@@ -7,13 +7,14 @@ public class VirginMovement : MonoBehaviour {
 
     public void OnHeroEntersFrame(int heroDirection)
     {
-        if (canEscape(heroDirection))
+        if (canEscape(heroDirection) && !masterManager.framesManager.DidKnightGetSword)
         {
             //Debug.Log("Can escape");
             escape(heroDirection);
         }
         else
         {
+            /*
             //Debug.Log("Can't escape");
             if (isInPuzzleRoom())
             {
@@ -33,6 +34,7 @@ public class VirginMovement : MonoBehaviour {
             {
                 killHero();
             }
+            */
         }
     }
 

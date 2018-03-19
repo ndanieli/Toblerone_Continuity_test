@@ -32,7 +32,14 @@ public class Border : MonoBehaviour
 
     private void moveHeroToNextFrame()
     {
-        frame.frameManager.SwitchHeroFrame(borderSide);
+        if(!frame.frameManager.DidKnightGetSword)
+        {
+            frame.frameManager.SwitchHeroFrame(borderSide);
+        }
+        else
+        {
+            frame.frameManager.MovePrincessAndKnight(borderSide);
+        }
         isTriggered = false;
     }
 }

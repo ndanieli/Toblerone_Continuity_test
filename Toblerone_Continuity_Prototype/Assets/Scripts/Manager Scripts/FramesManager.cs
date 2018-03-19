@@ -30,6 +30,8 @@ public class FramesManager : MonoBehaviour {
     public int initialVirginFrameRow;
     public int initialVirginFrameColumn;
     public int initialPuzzleFrameRow;
+
+
     public int initialPuzzleFrameColumn;
 
     //Internal values that are used in other files
@@ -47,6 +49,7 @@ public class FramesManager : MonoBehaviour {
         {TOP,BOTTOM},
         {BOTTOM,TOP}
     };
+    private bool didKnightGetSword;
     
     //public properties that allow to get, but not set the values
     public GameObject[,] Frames { get { return frames; } }
@@ -55,12 +58,14 @@ public class FramesManager : MonoBehaviour {
     public position VirginFrame { get { return virginFrame; } }
     public position PuzzleFrame { get { return puzzleFrame; } }
     public position EmptyFrame { get { return emptyFrame; } }
+    public bool DidKnightGetSword { get { return didKnightGetSword; } }
 
 
     // Use this for initialization
     void Start()
     {
         initFrameArray();
+        didKnightGetSword = false;
     }
 
     // Update is called once per frame
@@ -241,8 +246,6 @@ public class FramesManager : MonoBehaviour {
     public void SwitchHeroFrame(int borderSide)
     {
         previousHeroFrame = activeFrame;
-        //Debug.Log("SWITCH HERO FRAME TRIGGERED");
-        //PrintFramePosition(previousHeroFrame);
         int nextFrameRow = activeFrame.row;
         int nextFrameCol = activeFrame.col;
 
@@ -270,13 +273,17 @@ public class FramesManager : MonoBehaviour {
 
         if (frames[nextFrameRow,nextFrameCol] != null && checkLabels(borderSide, nextFrameRow, nextFrameCol))
         {
-            moveHeroToNextFrame(borderSide);
-            moveCameraToActiveFrame(nextFrameRow, nextFrameCol);
-            changeActiveFrame(nextFrameRow, nextFrameCol);
-            if (virginFrame.row == nextFrameRow && virginFrame.col == nextFrameCol)
+            if (nextFrameRow != puzzleFrame.row || nextFrameCol != puzzleFrame.col)
             {
-                triggerVirginMovementIfNeeded(borderSide);
+                moveHeroToNextFrame(borderSide);
+                moveCameraToActiveFrame(nextFrameRow, nextFrameCol);
+                changeActiveFrame(nextFrameRow, nextFrameCol);
+                if (virginFrame.row == nextFrameRow && virginFrame.col == nextFrameCol)
+                {
+                    triggerVirginMovementIfNeeded(borderSide);
+                }
             }
+            
         }
     }
 
@@ -493,6 +500,7 @@ public class FramesManager : MonoBehaviour {
                 break;
         }
     }
+
     public void PlaceHeroAfterDeath()
     {
         hero.gameObject.transform.position = (Vector2)frames[previousHeroFrame.row, previousHeroFrame.col].gameObject.transform.position - heroRelativePos;
@@ -508,4 +516,59 @@ public class FramesManager : MonoBehaviour {
     {
         Debug.Log(" ROW : " + pos.row + " COL : " + pos.col);
     }
+
+    public void SetKnightGotSword()
+    {
+        didKnightGetSword = true;
+    }
+
+    public void MovePrincessAndKnight(int borderSide)
+    {
+        previousHeroFrame = activeFrame;
+        int nextFrameRow = activeFrame.row;
+        int nextFrameCol = activeFrame.col;
+
+        switch (borderSide)
+        {
+            case LEFT:
+                nextFrameCol -= 1;
+                break;
+
+            case RIGHT:
+                nextFrameCol += 1;
+                break;
+
+            case TOP:
+                nextFrameRow -= 1;
+                break;
+
+            case BOTTOM:
+                nextFrameRow += 1;
+                break;
+
+            default:
+                break;
+        }
+
+        if (frames[nextFrameRow, nextFrameCol] != null && checkLabels(borderSide, nextFrameRow, nextFrameCol))
+        {
+            moveHeroToNextFrame(borderSide);
+            moveCameraToActiveFrame(nextFrameRow, nextFrameCol);
+
+            Vector2 currentDiff = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().transform.position - Virgin.gameObject.transform.position;
+            Virgin.gameObject.transform.position = (Vector2)frames[nextFrameRow, nextFrameCol].GetComponent<Frame>().transform.position - currentDiff;
+
+            changeActiveFrame(nextFrameRow, nextFrameCol);
+            virginFrame.row = nextFrameRow;
+            virginFrame.col = nextFrameCol;
+
+            if (activeFrame.row == puzzleFrame.row && activeFrame.col == puzzleFrame.col)
+            {
+                GameObject.Find("Dragon").SetActive(false);
+            }
+
+        }
+    }
+
+
 }

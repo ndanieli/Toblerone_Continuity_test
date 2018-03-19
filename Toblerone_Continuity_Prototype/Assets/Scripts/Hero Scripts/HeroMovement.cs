@@ -17,14 +17,14 @@ public class HeroMovement : MonoBehaviour {
 
 
     //private bool grounded = false;
-    private Animator anim;
+    //private Animator anim;
     private Rigidbody2D rb2d;
 
 
     // Use this for initialization
     void Awake()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -48,7 +48,7 @@ public class HeroMovement : MonoBehaviour {
             float userLeftRightInput = Input.GetAxis("Horizontal");
             float userUpDownInput = Input.GetAxis("Vertical");
 
-            anim.SetFloat("Speed", Mathf.Abs(userLeftRightInput));
+            //anim.SetFloat("Speed", Mathf.Abs(userLeftRightInput));
 
             if (userLeftRightInput * rb2d.velocity.x < maxSpeed)
                 rb2d.AddForce(Vector2.right * userLeftRightInput * moveForce);
