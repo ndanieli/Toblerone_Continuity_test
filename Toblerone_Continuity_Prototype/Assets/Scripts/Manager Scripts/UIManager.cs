@@ -6,14 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
     public GameObject gameOverPanel;
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameObject startGamePanel;
 
     public void ShowGameOverPanel()
     {
@@ -24,4 +17,8 @@ public class UIManager : MonoBehaviour {
         gameOverPanel.SetActive(false);
     }
 
+    public void HideStartGamePanel()
+    {
+        startGamePanel.SetActive(false);
+    }
 }

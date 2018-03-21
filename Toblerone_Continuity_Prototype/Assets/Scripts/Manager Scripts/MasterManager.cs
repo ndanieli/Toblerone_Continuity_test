@@ -39,4 +39,9 @@ public class MasterManager : MonoBehaviour {
         UIManager.HideGameOverPanel();
         imageManager.DisableScreenLoseImage();
     }
+
+    public void StartGame()
+    {
+        UIManager.HideStartGamePanel();
+    }
 }
