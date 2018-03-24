@@ -8,3 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Intro.unity
+    guid: 6eb7d682accf9e54a946796f91ef4b92
+  - enabled: 1
+    path: Assets/First Playable.unity
+    guid: 9bd2168a016b9c9468c68b3ccb3be473
