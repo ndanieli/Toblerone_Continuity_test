@@ -285,11 +285,11 @@ public class FramesManager : MonoBehaviour {
             }
             else if (!didKnightGetSword && (virginFrame.row == activeFrame.row && virginFrame.col == activeFrame.col))
             {
-                Debug.Log("I am not a knight with out my sword! find it!");
+                masterManager.imageManager.ShowKnightChatBaloon();
             }
             else
             {
-                Debug.Log("My gosh, there's a dragon in that room!!");
+                masterManager.imageManager.ShowPrincessChatBaloon();
             }
             
         }

@@ -9,11 +9,15 @@ public class ImageManager : MonoBehaviour {
     public GameObject EndScreenLose;
     public Sprite knight_without_sword;
     public Sprite knight_with_sword;
+    public ChatBalloon princessChatBalloon;
+    public ChatBalloon knightChatBalloon;
 
     // Use this for initialization
     void Start () {
         EndScreenWin.GetComponent<Image>().enabled = false;
         EndScreenLose.GetComponent<Image>().enabled = false;
+        knightChatBalloon.Hide();
+        princessChatBalloon.Hide();
     }
 	
 	public void EnableScreenWinImage()
@@ -34,5 +38,17 @@ public class ImageManager : MonoBehaviour {
     public void DisableScreenLoseImage()
     {
         EndScreenLose.GetComponent<Image>().enabled = false;
+    }
+
+    public void ShowPrincessChatBaloon()
+    {
+        princessChatBalloon.SetText("My gosh, there's a dragon in that room!!");
+        princessChatBalloon.SetActive(true, 3.0f);
+    }
+
+    public void ShowKnightChatBaloon()
+    {
+        knightChatBalloon.SetText("I am not a knight with out my sword! find it!");
+        knightChatBalloon.SetActive(true, 3.0f);
     }
 }
