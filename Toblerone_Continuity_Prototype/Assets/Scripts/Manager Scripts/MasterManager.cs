@@ -17,14 +17,14 @@ public class MasterManager : MonoBehaviour {
 
     public void KillHero()
     {
-        Debug.Log("Kill Hero");
+        //Debug.Log("Kill Hero");
         imageManager.EnableScreenLoseImage();
         GameOverScreen();
     }
 
     public void LevelCompleted()
     {
-        Debug.Log("Level completed");
+        //Debug.Log("Level completed");
         imageManager.EnableScreenWinImage();
     }
 

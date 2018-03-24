@@ -593,7 +593,7 @@ public class FramesManager : MonoBehaviour {
             if (activeFrame.row == puzzleFrame.row && activeFrame.col == puzzleFrame.col)
             {
                 // TODO : New dragon death experience
-                GameObject.Find("Dragon").SetActive(false);
+                GameObject.Find("Dragon").gameObject.GetComponent<SpriteRenderer>().sprite = masterManager.imageManager.dragon_dead;
             }
 
         }
