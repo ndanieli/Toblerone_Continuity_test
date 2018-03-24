@@ -85,6 +85,12 @@ public class HeroMovement : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+
+
+        Vector3 childScale = gameObject.GetComponentInChildren<ChatBalloon>().gameObject.transform.localScale;
+        childScale.x *= -1;
+        gameObject.GetComponentInChildren<ChatBalloon>().gameObject.transform.localScale = childScale;
+
     }
 
     public void FreezeHero()

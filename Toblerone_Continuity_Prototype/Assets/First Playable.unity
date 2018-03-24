@@ -129,7 +129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &49920603
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1967,7 +1967,7 @@ Prefab:
     - target: {fileID: 224000013348768430, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -0.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 224000013348768430, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
         type: 2}
@@ -3343,7 +3343,7 @@ Prefab:
     - target: {fileID: 224000013348768430, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
         type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224000013348768430, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
         type: 2}
@@ -4273,7 +4273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1442811766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5813,7 +5813,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
