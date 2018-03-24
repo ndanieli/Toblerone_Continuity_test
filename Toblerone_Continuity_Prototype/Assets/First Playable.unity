@@ -1967,7 +1967,7 @@ Prefab:
     - target: {fileID: 224000013348768430, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 224000013348768430, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
         type: 2}
@@ -2058,7 +2058,22 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010001844388, guid: 3b48ba4ee0f6e6c4c911733fe1189e79, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014215863230, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014215863230, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014215863230, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
+        type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 42
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b48ba4ee0f6e6c4c911733fe1189e79, type: 2}
@@ -3448,7 +3463,22 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010001844388, guid: 3b48ba4ee0f6e6c4c911733fe1189e79, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014215863230, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014215863230, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014215863230, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
+        type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 42
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b48ba4ee0f6e6c4c911733fe1189e79, type: 2}
@@ -3989,6 +4019,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleManager: {fileID: 2110088505}
   SmallPuzzleIndicator: 0
+--- !u!114 &1330412602 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000010551101466, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
+    type: 2}
+  m_PrefabInternal: {fileID: 1179849324}
+  m_Script: {fileID: 11500000, guid: 5131109a89255ea48851dc96744136b1, type: 3}
 --- !u!1001 &1356182782
 Prefab:
   m_ObjectHideFlags: 0
@@ -5296,6 +5332,8 @@ MonoBehaviour:
   knight_without_sword: {fileID: 21300000, guid: a7ed57c43a022e740834d0d0ce1223c4,
     type: 3}
   knight_with_sword: {fileID: 21300000, guid: 4868a3b31269cdc4087ddb755d68cb43, type: 3}
+  princessChatBalloon: {fileID: 1970499361}
+  knightChatBalloon: {fileID: 1330412602}
 --- !u!1 &1807828787
 GameObject:
   m_ObjectHideFlags: 0
@@ -6122,6 +6160,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &1970499361 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000010551101466, guid: 3b48ba4ee0f6e6c4c911733fe1189e79,
+    type: 2}
+  m_PrefabInternal: {fileID: 676195949}
+  m_Script: {fileID: 11500000, guid: 5131109a89255ea48851dc96744136b1, type: 3}
 --- !u!1 &1979195440
 GameObject:
   m_ObjectHideFlags: 3
