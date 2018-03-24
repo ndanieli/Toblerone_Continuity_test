@@ -283,6 +283,14 @@ public class FramesManager : MonoBehaviour {
                     triggerVirginMovementIfNeeded(borderSide);
                 }
             }
+            else if (!didKnightGetSword && (virginFrame.row == activeFrame.row && virginFrame.col == activeFrame.col))
+            {
+                Debug.Log("I am not a knight with out my sword! find it!");
+            }
+            else
+            {
+                Debug.Log("My gosh, there's a dragon in that room!!");
+            }
             
         }
     }
@@ -413,11 +421,31 @@ public class FramesManager : MonoBehaviour {
         int virginRightLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[RIGHT];
         int virginBottomLabel = frames[virginFrame.row, virginFrame.col].GetComponent<Frame>().borderLabels[BOTTOM];
 
-
+        
         Frame leftFrame = frames[virginFrame.row, virginFrame.col - 1] != null ? frames[virginFrame.row, virginFrame.col - 1].GetComponent<Frame>() : null;
         Frame topFrame = frames[virginFrame.row - 1, virginFrame.col] != null ? frames[virginFrame.row - 1, virginFrame.col].GetComponent<Frame>() : null;
         Frame rightFrame = frames[virginFrame.row, virginFrame.col + 1] != null ? frames[virginFrame.row, virginFrame.col + 1].GetComponent<Frame>() : null;
         Frame bottomFrame = frames[virginFrame.row + 1, virginFrame.col] != null ? frames[virginFrame.row + 1, virginFrame.col].GetComponent<Frame>() : null;
+
+        if (!didKnightGetSword)
+        {
+            if (virginFrame.row == puzzleFrame.row && virginFrame.col - 1 == puzzleFrame.col)
+            {
+                leftFrame = null;
+            }
+            else if (virginFrame.row - 1 == puzzleFrame.row && virginFrame.col == puzzleFrame.col)
+            {
+                topFrame = null;
+            }
+            else if (virginFrame.row == puzzleFrame.row && virginFrame.col + 1 == puzzleFrame.col)
+            {
+                rightFrame = null;
+            }
+            else if (virginFrame.row + 1 == puzzleFrame.row && virginFrame.col == puzzleFrame.col)
+            {
+                bottomFrame = null;
+            }
+        }
 
         if (leftFrame != null && virginLeftLabel != -1 && virginLeftLabel == leftFrame.borderLabels[RIGHT])
         {
@@ -564,6 +592,7 @@ public class FramesManager : MonoBehaviour {
 
             if (activeFrame.row == puzzleFrame.row && activeFrame.col == puzzleFrame.col)
             {
+                // TODO : New dragon death experience
                 GameObject.Find("Dragon").SetActive(false);
             }
 
